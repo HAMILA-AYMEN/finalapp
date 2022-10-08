@@ -1,0 +1,5 @@
+export const GETUSERS="GETUSERS"
+export const ADDUSER="ADDUSER"
+export const DELETEUSER="DELETEUSER"
+export const UPDATEUSER="UPDATEUSER"
+export const GETUSER="GETUSER"
