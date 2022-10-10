@@ -22,7 +22,7 @@ export default function UserCard({user}) {
         component="img"
         alt="green iguana"
         height="140"
-        image="https://slp-statics.astockcdn.net/static_assets/staging/22spring/homepage/featured-contributors/card-5.jpg?width=580&format=webp"
+        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIpZ3u4WhVNe9S_b8W4Qxuh_gcgd_TmFcKJw&usqp=CAU"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

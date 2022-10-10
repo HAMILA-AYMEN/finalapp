@@ -9,7 +9,7 @@ router.get('/allusers',getAllUser)
 //get One user
 router.get('/user/:id',getUser)
 //delete User
-router.delete('/deleteuser/;id',deleteUser)
+router.delete('/deleteuser/:id',deleteUser)
 //Update User
 router.put('/updateuser/:id',updateUser)
 
