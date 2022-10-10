@@ -8,9 +8,9 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom'
 import {styled} from '@mui/material'
@@ -23,7 +23,7 @@ const MenuBox=styled(Box)({
     gap:"30px"
 })
 const pages = [{name:"Home",path:"/"},{name:"Users",path:"/users"},{name:"Add User",path:"/adduser"}];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -32,9 +32,7 @@ const ResponsiveAppBar = () => {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -43,6 +41,11 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location="/";
+	};
 
   return (
     <AppBar position="static">
@@ -76,6 +79,7 @@ const ResponsiveAppBar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
+             
               <MenuIcon />
             </IconButton>
             <Menu
@@ -96,6 +100,7 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+             
               {
     pages.map((page)=><Link to={page.path} key={page.name} style={{textDecoration:'none',color:"white"}}>
     <Typography variant="h6">{page.name}</Typography>
@@ -131,11 +136,11 @@ const ResponsiveAppBar = () => {
 </MenuBox>
 
           <Box style={{ marginLeft:" auto "}}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Hamila Aymen" src="/img/p1.jpeg" />
-              </IconButton>
-            </Tooltip>
+           
+              
+                <Avatar alt="Hamila Aymen" src="/img/avatar.webp" />
+             
+            
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -151,14 +156,13 @@ const ResponsiveAppBar = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              
+              
             </Menu>
           </Box>
+          <Button color="inherit"  onClick={handleLogout}>LogOut</Button>
         </Toolbar>
       </Container>
     </AppBar>

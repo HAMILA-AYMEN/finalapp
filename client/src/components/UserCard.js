@@ -9,12 +9,17 @@ import {useDispatch} from 'react-redux'
 import {deleteUser, getOneUser} from '../redux/actions/userAction'
 import { useNavigate } from 'react-router-dom';
 
+
 export default function UserCard({user}) {
   const dispatch=useDispatch()
   const navigate=useNavigate()
 
   const handleDelete=()=>{
     dispatch(deleteUser(user._id))
+  }
+  const handleEdit=()=>{
+    dispatch(getOneUser(user._id))
+    navigate('/edit')
   }
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -40,10 +45,7 @@ export default function UserCard({user}) {
       </CardContent>
       <CardActions>
         <Button size="small" variant="contained" onClick={handleDelete}>Delete</Button>
-        <Button size="small"  variant="contained" onClick={()=>{
-          dispatch(getOneUser(user._id));
-          navigate('/edit')
-        }} >Edit</Button>
+        <Button size="small"  variant="contained" onClick={handleEdit} >Edit</Button>
       </CardActions>
     </Card>
   );

@@ -10,7 +10,7 @@ switch(type){
 case GETUSERS:
     return {...state,users:payload}
 case GETUSER:
-    return {...state,users:payload}
+    return {...state,user:payload}
 default:
     return state
 }
