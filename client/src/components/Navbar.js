@@ -9,10 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-
-
+import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom'
+import { Link,useNavigate  } from 'react-router-dom'
 import {styled} from '@mui/material'
 
 
@@ -28,6 +28,7 @@ const pages = [{name:"Home",path:"/"},{name:"Users",path:"/users"},{name:"Add Us
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate=useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +39,10 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -46,6 +51,14 @@ const ResponsiveAppBar = () => {
 		localStorage.removeItem("token");
 		window.location="/";
 	};
+  const navigateToProfile=()=>{
+    
+    navigate('/Profile')
+  }
+  const navigateToSettings=()=>{
+    
+    navigate('/Settings')
+  }
 
   return (
     <AppBar position="static">
@@ -67,7 +80,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+           
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,6 +121,8 @@ const ResponsiveAppBar = () => {
 }
             </Menu>
           </Box>
+
+
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -125,8 +140,10 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+          
           </Typography>
+
+
           <MenuBox>
           {
     pages.map((page)=><Link to={page.path} key={page.name} style={{textDecoration:'none',color:"white"}}>
@@ -138,7 +155,11 @@ const ResponsiveAppBar = () => {
           <Box style={{ marginLeft:" auto "}}>
            
               
-                <Avatar alt="Hamila Aymen" src="/img/avatar.webp" />
+          <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar  />
+              </IconButton>
+            </Tooltip>
              
             
             <Menu
@@ -158,11 +179,15 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
               
             >
-              
+              <MenuItem  onClick={handleCloseUserMenu}>
+                  <Typography variant="h6" onClick={handleLogout}>LogOut</Typography>
+                  
+                  
+                </MenuItem>
               
             </Menu>
           </Box>
-          <Button color="inherit"  onClick={handleLogout}>LogOut</Button>
+          
         </Toolbar>
       </Container>
     </AppBar>
