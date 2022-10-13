@@ -1,5 +1,5 @@
 import axios from "axios"
-import { GETUSERS,GETUSER } from "../types"
+import { GETUSERS,GETUSER, TOGGLESHOW } from "../types"
 
 export const getAllUsers=()=>async(dispatch)=>{
 try {
@@ -7,7 +7,9 @@ try {
     dispatch({
         type:GETUSERS,
         payload:res.data
+       
     })
+    console.log(res.message)
 } catch (error) {
     console.log(error)
 }
@@ -15,7 +17,8 @@ try {
 
 export const addUser=(data)=>async(dispatch)=>{
     try {
-        await axios.post('/api/users/adduser',data)
+      const res=  await axios.post('/api/users/adduser',data)
+       
         dispatch(getAllUsers())
     } catch (error) {
         console.log(error)
@@ -48,5 +51,10 @@ export const updateUser=(id,data)=>async(dispatch)=>{
        
     } catch (error) {
         console.log(error) 
+    }
+}
+export const toggleShow=()=>{
+    return {
+        type:TOGGLESHOW
     }
 }

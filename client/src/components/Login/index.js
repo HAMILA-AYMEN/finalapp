@@ -2,19 +2,24 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import PasswordField from 'material-ui-password-field'
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 const Login = () => {
 	const [data, setData] = useState({ Email: "", Password: "" });
 	const [error, setError] = useState("");
 
-	const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value });
+	const handleChange = (event) => {
+		setData({ ...data, [event.target.name]: event.target.value  });
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "http://localhost:5100/api/auth";
+			const url = "/api/auth";
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.data);
 			window.location = "/";
@@ -35,24 +40,26 @@ const Login = () => {
 				<div className={styles.left}>
 					<form className={styles.form_container} onSubmit={handleSubmit}>
 						<h1>Login to Your Account</h1>
-						<input
-							type="email"
-							placeholder="Email"
-							name="Email"
+
+						<FormControl >
+						<TextField 
+							 id="standard-basic"
+							 label="Email"
+							  variant="standard" 
+							  name="Email"
 							onChange={handleChange}
-							value={data.Email}
-							required
-							className={styles.input}
-						/>
-						<input
-							type="password"
-							placeholder="Password"
-							name="Password"
-							onChange={handleChange}
-							value={data.Password}
-							required
-							className={styles.input}
-						/>
+							
+							/>
+						<InputLabel htmlFor='name-label'></InputLabel>
+  <PasswordField fullWidth sx={{ m: 1 }}
+    id='name-label'
+   
+	name="Password"
+	onChange={handleChange}
+  />
+  <FormHelperText>Enter your secret password</FormHelperText>
+  </FormControl>
+
 						{error && <div className={styles.error_msg}>{error}</div>}
 						<button type="submit" className={styles.green_btn}>
 							Sing In

@@ -16,14 +16,14 @@ const userLoginSchema=new mongoose.Schema({
     },
     Password:{
         type:String,required:true
-    }
+    },
 
-   
+    
 
 })
 userLoginSchema.methods.generateAuthToken = function(){
     const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-		expiresIn: "7d",
+		expiresIn: "10d",
 	});
 	return token;
 
@@ -35,7 +35,9 @@ const validate = (data) => {
 		Firstname: Joi.string().required().label("First Name"),
 		Lastname: Joi.string().required().label("Last Name"),
 		Email: Joi.string().email().required().label("Email"),
-		Password: passwordComplexity().required().label("Password"),
+       
+		Password: passwordComplexity().required().label("Password")
+        
 	});
 	return schema.validate(data);
 };

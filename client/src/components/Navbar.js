@@ -8,7 +8,8 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -22,7 +23,9 @@ const MenuBox=styled(Box)({
     alignItems:"center",
     gap:"30px"
 })
+
 const pages = [{name:"Home",path:"/"},{name:"Users",path:"/users"},{name:"Add User",path:"/adduser"}];
+
 
 
 const ResponsiveAppBar = () => {
@@ -179,11 +182,15 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
               
             >
-              <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography variant="h6" onClick={handleLogout}>LogOut</Typography>
-                  
-                  
+            
+                <MenuItem style={{display:"inline-block" }} onClick={handleCloseUserMenu}>
+                  <MenuItem onClick={handleLogout}  textAlign="center"><LogoutOutlinedIcon></LogoutOutlinedIcon>LogOut</MenuItem>
+                  <MenuItem onClick={navigateToProfile}  textAlign="center"><AccountBoxOutlinedIcon></AccountBoxOutlinedIcon>Profile </MenuItem>
+          
+       
+                 
                 </MenuItem>
+                
               
             </Menu>
           </Box>
